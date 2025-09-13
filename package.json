@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "chai": "^6.0.1",
+    "mocha": "^11.7.2",
+    "sinon": "^21.0.0",
+    "supertest": "^7.1.4"
+  },
+  "scripts": {
+    "test": "mocha \"test/**/*.js\" --timeout 10000",
+    "test-rest-external": "mocha \"test/rest/external/**/*.js\" --timeout 10000",
+    "test-rest-controller": "mocha \"test/rest/controller-/**/*.js\" --timeout 10000",
+    "start": "node server.js"
+  }
+}
