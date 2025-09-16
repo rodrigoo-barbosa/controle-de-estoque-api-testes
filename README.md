@@ -147,7 +147,7 @@ Somente usuários cadastrados podem realizar operações protegidas. Usuário n�
 Os testes estão localizados em `test/rest/controller/product-controller.test.js` e utilizam Supertest para validação dos endpoints, incluindo cenários de autenticação, movimentação inválida e usuários não autorizados.
 
 Para rodar os testes:
-```powershell
+```bash
 npm test
 ```
 

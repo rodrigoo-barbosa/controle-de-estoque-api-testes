@@ -38,4 +38,4 @@ jobs:
             sleep 1
           done
       - name: Executar todos os testes
-        run: npm test
+        run: npx mocha "test/**/*.js"
