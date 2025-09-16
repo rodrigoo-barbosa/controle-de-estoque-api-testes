@@ -2,18 +2,18 @@
 # API Controle de Estoque
 
 ## Descrição
-API REST para controle de estoque simples, desenvolvida com Node.js e Express. Possui autenticação para movimentações de estoque, CRUD de produtos, regras de negócio e documentação via Swagger.
+API REST e GraphQL para controle de estoque simples, desenvolvida com Node.js, Express e ApolloServer. Possui autenticação para movimentações de estoque, CRUD de produtos, regras de negócio, documentação via Swagger e interface GraphQL.
 
 ## Estrutura de Diretórios
 - `controller/` - Lógica dos endpoints
 - `service/` - Regras de negócio
 - `model/` - Modelos de dados
 - `repository/` - Persistência em memória
-- `middleware/` - Autenticação JWT
+- `middleware/` - Autenticação JWTnpx mocha test/rest/controller/
 - `test/` - Testes automatizados (Supertest)
     - `fixtures/` - Usuários de teste
     - `rest/controller/` - Testes dos endpoints
-    - `external/` - Integrações externas
+    - `rest/external/` - Integrações externas
 - `app.js` - Configuração da aplicação Express
 - `server.js` - Inicialização do servidor
 - `swagger.json` - Documentação Swagger
@@ -27,6 +27,65 @@ API REST para controle de estoque simples, desenvolvida com Node.js e Express. P
    ```powershell
    node server.js
    ```
+
+## API GraphQL
+1. Instale as dependências necessárias para GraphQL:
+    ```powershell
+    npm install apollo-server-express graphql jsonwebtoken dotenv
+    ```
+2. Inicie o servidor GraphQL:
+    ```powershell
+    node graphql/server.js
+   API REST e GraphQL para controle de estoque simples, desenvolvida com Node.js, Express e ApolloServer. Possui autenticação JWT para movimentações de estoque, CRUD de produtos, regras de negócio, documentação via Swagger e interface GraphQL.
+
+### Playground
+Acesse o playground em: [http://localhost:4000/graphql](http://localhost:4000/graphql)
+
+### Exemplos de Queries
+```graphql
+query {
+   products {
+      id
+      name
+      quantity
+      price
+   1. Instale as dependências necessárias para GraphQL:
+      ```powershell
+      npm install apollo-server-express graphql jsonwebtoken dotenv
+      ```
+   2. Inicie o servidor GraphQL:
+      ```powershell
+      node graphql/server.js
+      ```
+   }
+}
+```
+
+### Exemplos de Mutations protegidas (JWT)
+```graphql
+mutation {
+   login(username: "rodrigo.barbosa", password: "1q2w3e4r") {
+      token
+   }
+}
+```
+Use o token retornado no header `Authorization: Bearer <token>` para as mutations:
+```graphql
+mutation {
+   createProduct(name: "Novo Produto", quantity: 10, price: 99.99) {
+      id
+      name
+   }
+}
+```
+
+### Estrutura GraphQL
+- `graphql/app.js` - Configuração ApolloServer e Express
+- `graphql/server.js` - Inicialização do servidor
+- `graphql/schema.js` - Types, Queries, Mutations
+- `graphql/resolvers.js` - Implementação das resolvers
+- `graphql/auth.js` - Middleware JWT
+- `graphql/userFixture.js` - Usuários para autenticação
 
 ## Endpoints
 - `GET /products` - Lista todos os produtos
@@ -42,6 +101,17 @@ API REST para controle de estoque simples, desenvolvida com Node.js e Express. P
 ## Autenticação
 Para criar, atualizar, excluir produtos, dar entrada ou saída de estoque, é necessário autenticação via JWT.
 
+
+   Testes para a API GraphQL estão em `test/rest/external/product-externalGraphQL.test.js`.
+
+   Para rodar os testes REST:
+   ```powershell
+   npx mocha test/rest/controller/
+   ```
+   Para rodar os testes GraphQL:
+   ```powershell
+   npx mocha test/rest/external/product-externalGraphQL.test.js
+   ```
 ### Usuários cadastrados (fixtures):
 - username: `rodrigo.barbosa`, password: `1q2w3e4r`
 - username: `rodrigo.silva`, password: `123456789`
