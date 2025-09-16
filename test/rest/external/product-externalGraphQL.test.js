@@ -5,8 +5,7 @@ describe('Testes de Controller External de Produtos via GraphQL', () => {
     let token;
 
     before(async () => {
-        const loginMutation = `
-            mutation {
+        const loginMutation = ` mutation {
                 login(username: "rodrigo.barbosa", password: "1q2w3e4r") {
                     token
                 }
@@ -15,12 +14,11 @@ describe('Testes de Controller External de Produtos via GraphQL', () => {
         const respostaLogin = await request('http://localhost:4000')
             .post('/graphql')
             .send({ query: loginMutation })
-        expect(respostaLogin.status).to.equal(200);
-        //expect(respostaLogin.body.data.login.token).to.exist
-        //token = respostaLogin.body.data.login.token
+        expect(respostaLogin.status).to.equal(200)
+        
     })
 
-    it.only('Quando consulta todos os produtos, retorna lista de produtos', async () => {
+    it('Quando consulta todos os produtos, retorna lista de produtos', async () => {
         const query = `
             query {
                 products { id
@@ -34,9 +32,5 @@ describe('Testes de Controller External de Produtos via GraphQL', () => {
             .post('/graphql')
             .set('Authorization', `Bearer ${token}`)
             .send({ query })
-        //console.log(resposta.body)
-        //expect(resposta.status).to.equal(200)
-        //expect(resposta.body.data.products).to.be.an('array')
-        
-    })
+        })
 })
